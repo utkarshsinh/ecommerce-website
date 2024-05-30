@@ -15,6 +15,9 @@ Using Java and the Spring Boot environment, we will create a backend that suppor
 
 ### Frontend: Vue.js
 
+docker run -it -p 8082:8082 utkarshsinh96/ecommerce-vuejs-ui:v1.0
+
+
 For the frontend, we will use Vue.js to develop a customer-facing application. Users will be able to:
 - View products
 - Create and manage wish lists
