@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: ecommerce_v2
+      MYSQL_ROOT_PASSWORD: mseMitthu@#2
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  app:
+    image: utkarshsinh96/ecommerce-backend-spring:v1
+    container_name: springboot-app-newest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ecommerce_v2
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: mseMitthu@#2
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    ports:
+      - "8081:8081"
+    depends_on:
+       mysql:
+        condition: service_healthy
+  frontend:
+    image: utkarshsinh96/ecommerce-vuejs-ui:v1.0
+    container_name: vue-frontend-newest
+    ports:
+      - "8082:8082"
+    environment:
+      NODE_OPTIONS: --openssl-legacy-provider
+    command: ["npm", "run", "serve"]
+    depends_on:
+      - app
+volumes:
+  mysql-data:
