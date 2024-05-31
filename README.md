@@ -52,4 +52,15 @@ This project equips you with the skills to create a full-stack e-commerce applic
 ---
 
 Feel free to reach out if you have any questions or need further assistance with the project.
-docker run -it -p 8082:8082 utkarshsinh96/ecommerce-vuejs-ui:v1.0
+
+
+___
+
+mysqlsh
+\connect root@localhost:3307
+then provide password
+\sql
+use ecommerce_v2
+show tables
+
+
